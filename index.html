@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>GeneSPIDER - Generation and Simulation Package for Informative Data ExploRation</title>
+<meta name="author" content="(Andreas Tjärnberg, group retreat)"/>
+
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.6.2/css/reveal.css"/>
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.6.2/css/theme/serif.css" id="theme"/>
+<link rel="stylesheet" href=""/>
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'http://cdn.jsdelivr.net/reveal.js/2.6.2/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+<h3>GeneSPIDER - Generation and Simulation Package for Informative Data ExploRation</h3> <h4>Andreas Tjärnberg, group retreat</h4> <h4><a href="mailto:andreas.tjarnberg@scilifelab.se">andreas.tjarnberg@scilifelab.se</a></h4> <h4>2015-07-03</h4>
+</section>
+
+
+<section id="slide-orgheadline1">
+<div class="slide-header"></div>
+<h2 id="orgheadline1">Why</h2>
+<ul>
+<li>Problem solving</li>
+<li>Clean pipeline</li>
+<li>Future friendly</li>
+
+</ul>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgheadline2">
+<div class="slide-header"></div>
+<h2 id="orgheadline2">Structure</h2>
+
+<div class="figure">
+<p><img src="img/genespider_structure.png" alt="genespider_structure.png" />
+</p>
+</div>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgheadline17">
+<div class="slide-header"></div>
+<h2 id="orgheadline17">Example</h2>
+<div class="outline-text-2" id="text-orgheadline17">
+</div><div class="slide-footer"></div>
+</section>
+<section id="slide-orgheadline6">
+<div class="slide-header"></div>
+<h3 id="orgheadline6">Data handling</h3>
+<div class="outline-text-3" id="text-orgheadline6">
+</div><div class="slide-footer"></div>
+</section>
+<section id="slide-orgheadline3">
+<div class="slide-header"></div>
+<h4 id="orgheadline3">Network</h4>
+<p>
+Creating
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-matlab">A = full(sprandn(10,10,0.25));
+Net = datastruct.Network(A,<span style="color: #8b2252;">'random'</span>);
+Net.desc = <span style="color: #8b2252;">'a description'</span>;
+</pre>
+</div>
+<div style="font-size: 70%;">
+<p>
+or load from data base
+</p>
+</div>
+<div class="org-src-container">
+
+<pre  class="src src-matlab">Net = datastruct.Network.load([<span style="color: #8b2252;">'/afs/pdc.kth.se/misc/pdc/volumes/sbc/prj.sbc.sparx.2/Benchmark/data/network/other/Nordling-D20100302-random-N10-L25-ID1446937.mat'</span>])
+Net.desc = <span style="color: #8b2252;">'a description'</span>;
+</pre>
+</div>
+
+<p>
+Data type
+</p>
+<pre class="example">
+Net =
+
+  10x10 Network array with properties:
+
+                    A: [10x10 double]
+                    G: [10x10 double]
+              network: 'Nordling-D20100302-random-N10-L25-ID1446937'
+    interrampatteness: 144.69
+    NetworkComponents: 1
+                 tauG: 0.085032
+                names: {'G1' 'G2' 'G3' 'G4' 'G5' 'G6' 'G7' 'G8' 'G9' 'G10'}
+                 desc: 'a description'
+</pre>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgheadline4">
+<div class="slide-header"></div>
+<h4 id="orgheadline4">Dataset</h4>
+<p>
+Creating 
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-matlab">filename = [<span style="color: #8b2252;">'/afs/pdc.kth.se/misc/pdc/volumes/sbc/prj.sbc.sparx.2/Benchmark/data/dataset/N10/Nordling-ID1446937-D20130902-E15-SNR3291-IDY15968.mat'</span>];
+Data = datastruct.Dataset.load(filename);
+</pre>
+</div>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgheadline5">
+<div class="slide-header"></div>
+<h4 id="orgheadline5">Dataset</h4>
+<p>
+Data type
+</p>
+<pre class="example">
+Data =
+
+  Dataset with properties:
+
+    dataset: 'Nordling-ID1446937-D20130902-E15-SNR3291-IDY15968'
+    network: 'Nordling-D20100302-random-N10-L25-ID1446937'
+          P: [10x15 double]
+          F: [10x15 double]
+        cvP: [10x10 double]
+        sdP: [10x15 double]
+          Y: [10x15 double]
+          E: [10x15 double]
+        cvY: [10x10 double]
+        sdY: [10x15 double]
+     lambda: [0.00028399 0]
+       SNRY: 3.2912
+       SNRE: 7
+       SNRy: 10.331
+       SNRe: 10.991
+      SNRym: 15.479
+      SNRem: 10.64
+       etay: []
+       etau: []
+      alpha: 0.01
+      names: {'G01' 'G02' 'G03' 'G04' 'G05' 'G06' 'G07' 'G08' 'G09' 'G10'}
+       desc: ''
+</pre>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgheadline7">
+<div class="slide-header"></div>
+<h3 id="orgheadline7">Data export</h3>
+<ul>
+<li>native matlab</li>
+<li>json  (JavaScript Object Notation)</li>
+<li>xml (extensible markup language)</li>
+
+</ul>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgheadline8">
+<div class="slide-header"></div>
+<h3 id="orgheadline8">Infere</h3>
+<div style="font-size: 70%;">
+<p>
+run inference Methods
+</p>
+</div>
+<div class="org-src-container">
+
+<pre  class="src src-matlab">method_name = <span style="color: #8b2252;">'tlsco'</span>; <span style="color: #b22222;">% use method</span>
+regularization_parameter = logspace(<span style="color: #228b22;">-</span>6,1,100); <span style="color: #b22222;">% define input parameters</span>
+models = Methods.(method_name)(Data,regularization_parameter); <span style="color: #b22222;">% do inference</span>
+</pre>
+</div>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgheadline9">
+<div class="slide-header"></div>
+<h3 id="orgheadline9">Analysis</h3>
+<p>
+Do comparison
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-matlab">M = tools.NetworkComparison(Net,models);
+</pre>
+</div>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgheadline10">
+<div class="slide-header"></div>
+<h3 id="orgheadline10">Analysis</h3>
+<pre class="example">
+M = 
+
+  NetworkComparison with properties:
+
+            A: [10x10 double]
+     abs2norm: [1x100 double]
+     rel2norm: [1x100 double]
+         maee: [1x100 double]
+         mree: [1x100 double]
+         mase: [1x100 double]
+         mrse: [1x100 double]
+        masde: [1x100 double]
+        mrsde: [1x100 double]
+        maeve: [1x100 double]
+        mreve: [1x100 double]
+        maede: [1x100 double]
+        mrede: [1x100 double]
+     afronorm: [1x100 double]
+     rfronorm: [1x100 double]
+      al1norm: [1x100 double]
+      rl1norm: [1x100 double]
+     n0larger: [1x100 double]
+     r0larger: [1x100 double]
+          ncs: [1x100 double]
+          sst: [1x100 double]
+         sst0: [1x100 double]
+          plc: [1x100 double]
+</pre>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgheadline11">
+<div class="slide-header"></div>
+<h3 id="orgheadline11">Analysis</h3>
+<pre class="example">
+   nlinks: [1x100 double]
+       TP: [1x100 double]
+       TN: [1x100 double]
+       FP: [1x100 double]
+       FN: [1x100 double]
+      sen: [1x100 double]
+      spe: [1x100 double]
+   comspe: [1x100 double]
+      pre: [1x100 double]
+     TPTN: [1x100 double]
+structsim: [1x100 double]
+      MCC: [1x100 double]
+      FEL: [1x100 double]
+       TR: [1x100 double]
+       TZ: [1x100 double]
+       FI: [1x100 double]
+       FR: [1x100 double]
+       FZ: [1x100 double]
+   dirsen: [1x100 double]
+   dirspe: [1x100 double]
+  dirprec: [1x100 double]
+     SMCC: [1x100 double]
+</pre>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgheadline12">
+<div class="slide-header"></div>
+<h3 id="orgheadline12">Performance Measures</h3>
+<pre class="example">
+A          	Gold standard network 
+FEL        	Fraction of Existing Links (for RNI = FPEL) 
+FI         	False Interaction 
+FN         	# False Negatives 
+FP         	# False Positives 
+FR         	False Regulation 
+FZ         	False Zero 
+MCC        	Matthews correlation coefficient 
+SMCC       	Signed Matthews correlation coefficient 
+TN         	# True Negatives 
+TP         	# True Positives 
+TPTN       	Number of links that is present and absent in both networks (TP+TN) 
+TR         	True Regulation 
+TZ         	True Zero 
+abs2norm   	Absolute induced 2-norm 
+afronorm   	Absolute Frobenius norm, equivalent to 2-norm of A vectorized 
+al1norm    	l1-norm of zero elements 
+comspe     	Complementary specificity 1-Specificity 
+dirprec    	Directed precision 
+dirsen     	Directed sensitivity 
+dirspe     	Directed specificity 
+maede      	Max absolute eigen direction error
+</pre>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgheadline13">
+<div class="slide-header"></div>
+<h3 id="orgheadline13">Performance Measures</h3>
+<pre class="example">
+maee       	Max absolute element error 
+maeve      	Max absolute eigen value error 
+masde      	Max absolute singular direction error 
+mase       	Max absolute singular value error 
+mrede      	Max relative eigen direction error 
+mree       	Max relative element error 
+mreve      	Max relative eigen value error 
+mrsde      	Max relative singular direction error 
+mrse       	Max relative singular value error 
+n0larger   	# zero elements larger than smallest nonzero element of A 
+ncs        	# Correct signs 
+nlinks     	# Links in estimated network 
+plc        	Pearson's linear correlation coefficient 
+pre        	Precision TP/(TP+FP) 
+r0larger   	# zero elements larger than smallest nonzero element of A/# zero elements in A 
+rel2norm   	Relative induced 2-norm 
+rfronorm   	Relative Frobenius norm 
+rl1norm    	Relative l1-norm of zero elements 
+sen        	Sensitivity TP/(TP+FN) 
+spe        	Specificity TN/(TN+FP) 
+sst        	Similarity of signed topology 
+sst0       	Similarity of signed topology of nonzero elements of A 
+structsim  	Structural similarity (TP+TN)/#Nodes^2
+</pre>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgheadline14">
+<div class="slide-header"></div>
+<h3 id="orgheadline14">NetworkComaprison</h3>
+<p>
+Supports intuitive operations sich as <code>min</code> <code>max</code>
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-matlab">disp(<span style="color: #8b2252;">'Maximum value for each measure'</span>)
+max(M)
+</pre>
+</div>
+
+<pre class="example">
+  24.347   |           99
+  13.009   |           25
+  22.692   |           75
+     Inf   |           74
+   12.05   |           25
+     Inf   |            1
+  24.342   |            1
+    1975   |      0.98667
+  22.692   |            1
+     Inf   |           93
+  22.692   |         0.93
+   18513   |      0.80829
+   30.15   |            1
+     601   |            0
+  3.3493   |           75
+0.086486   |           25
+      13   |           74
+ 0.17333   |           25
+      75   |            0
+    0.75   |            1
+       0   |            0
+-0.75129   |            0
+</pre>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgheadline15">
+<div class="slide-header"></div>
+<h3 id="orgheadline15">NetworkComaprison</h3>
+<p>
+conditional <code>min</code>, <code>max</code>
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-matlab">disp(<span style="color: #8b2252;">'Measures when MCC is maximized'</span>)
+max(M,<span style="color: #8b2252;">'MCC'</span>)
+</pre>
+</div>
+
+<pre class="example">
+    24.338   |           20
+    13.009   |           19
+    22.692   |           74
+       Inf   |            1
+   0.32557   |            6
+3.6155e+14   |         0.76
+    24.324   |      0.98667
+   -1.8783   |     0.013333
+    22.359   |         0.95
+       Inf   |           93
+    22.361   |         0.93
+    728.97   |      0.80829
+     30.14   |         0.76
+    5.9799   |            0
+    0.7154   |           74
+  0.018473   |           19
+         1   |            1
+  0.013333   |            6
+        74   |            0
+      0.74   |      0.98667
+         0   |            0
+  -0.99837   |    -0.058026
+</pre>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgheadline16">
+<div class="slide-header"></div>
+<h3 id="orgheadline16">NetworkComparison</h3>
+<p>
+Handling data works as expected <i>i.e.</i>
+</p>
+
+<div class="org-src-container">
+
+<pre  class="src src-matlab">M2 = [M;M];
+</pre>
+</div>
+<div style="font-size: 80%;">
+<p>
+will concatenate vertically
+</p>
+</div>
+<pre class="example">
+M2 = 
+
+  NetworkComparison with properties:
+
+            A: [10x10 double]
+     abs2norm: [2x100 double]
+     rel2norm: [2x100 double]
+         maee: [2x100 double]
+         mree: [2x100 double]
+               ...
+</pre>
+
+
+<div class="org-src-container">
+
+<pre  class="src src-matlab">M3 = [M,M];
+</pre>
+</div>
+<div style="font-size: 80%;">
+<p>
+will concatenate horizontally
+</p>
+</div>
+<pre class="example">
+M3 = 
+
+  NetworkComparison with properties:
+
+            A: [10x10 double]
+     abs2norm: [1x200 double]
+     rel2norm: [1x200 double]
+         maee: [1x200 double]
+         mree: [1x200 double]
+               ...
+</pre>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgheadline18">
+<div class="slide-header"></div>
+<h2 id="orgheadline18">Future work</h2>
+<ul>
+<li>Model selection
+<ul>
+<li>RSS</li>
+<li>gof</li>
+
+</ul></li>
+<li>Rigorous data set testing</li>
+
+</ul>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgheadline19">
+<div class="slide-header"></div>
+<h2 id="orgheadline19">Thank you for listening!</h2>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgheadline20">
+<div class="slide-header"></div>
+<h2 id="orgheadline20">Notes</h2>
+<div style="font-size: 70%;">
+<p>
+To get this presentations <a href="https://github.com/Xparx/genespider-presentation">source</a>
+</p>
+</div>
+<div class="org-src-container">
+
+<pre  class="src src-sh">git clone https://github.com/Xparx/genespider-presentation
+</pre>
+</div>
+
+<div style="font-size: 70%;">
+<p>
+To extract the example code from this presentation open the source file <code>index.org</code> in emacs
+and execute the function
+</p>
+</div>
+<div class="org-src-container">
+
+<pre  class="src src-emacs-lisp">(org-babel-tangle)
+</pre>
+</div>
+<div style="font-size: 70%;">
+<p>
+can be done with the command
+<code>C-c C-v t</code>
+</p>
+</div>
+<div class="slide-footer"></div>
+</section>
+</section>
+</div>
+</div>
+
+<script src="http://cdn.jsdelivr.net/reveal.js/2.6.2/lib/js/head.min.js"></script>
+<script src="http://cdn.jsdelivr.net/reveal.js/2.6.2/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: true,
+center: true,
+slideNumber: true,
+rollingLinks: false,
+keyboard: true,
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+]
+});
+</script>
+</body>
+</html>
