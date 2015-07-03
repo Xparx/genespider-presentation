@@ -388,7 +388,7 @@ M3 =
 * Thank you for listening!
 * Notes
 #+reveal_html: <div style="font-size: 70%;">
-To get this presentation
+To get this presentations [[https://github.com/Xparx/genespider-presentation][source]]
 #+reveal_html: </div>
 #+begin_src sh
 git clone https://github.com/Xparx/genespider-presentation
