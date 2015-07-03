@@ -1,0 +1,5 @@
+* GeneSPIDER - Generation and Simulation Package for Informative Data ExploRation
+
+[[file:index.org][source]]
+
+[[https://xparx.github.io/genespider-presentation][presentation]]
