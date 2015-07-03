@@ -149,7 +149,7 @@ Data =
 - json  (JavaScript Object Notation)
 - xml (extensible markup language)
 
-** Infere
+** Infer
 #+reveal_html: <div style="font-size: 70%;">
 run inference Methods
 #+reveal_html: </div>
@@ -275,7 +275,7 @@ sst0       	Similarity of signed topology of nonzero elements of A
 structsim  	Structural similarity (TP+TN)/#Nodes^2 
 #+end_EXAMPLE
 ** NetworkComaprison
-Supports intuitive operations sich as =min= =max=
+Supports intuitive operations such as =min= =max=
 #+begin_src matlab :tangle ./sample_code.m
 disp('Maximum value for each measure')
 max(M)
